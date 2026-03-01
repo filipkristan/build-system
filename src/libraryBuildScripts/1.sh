@@ -1,0 +1,1 @@
+sudo apt-get install xorg-dev libglfw3-dev libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules -y
