@@ -38,9 +38,12 @@ void src::outputNeededLibraries(const std::string file, std::string librariesOut
     }
 }
 
-void src::generateBuildCommand(std::string buildFlagsPath) {
+void src::generateBuildCommand(std::string buildFlagsPath, int argc, char* argv) {
     std::string allBuildFlags = fk::readDataFromFile(buildFlagsPath);
-    std::string inputFile = "example.cc";
+    std::string inputFile = "main.cpp";
+    if (argc == 2) {
+        inputFile = argv;
+    }
     std::string outputFileName = "a.out";
     std::string buildCommand = "clang " + inputFile + " -lstdc++ " + allBuildFlags + " -o " + outputFileName;
     fk::msg(1, "Compiling the program!");
@@ -48,15 +51,19 @@ void src::generateBuildCommand(std::string buildFlagsPath) {
 }
 
 void src::runCompiledProgram() {
-    fk::msg(1, "Running the compiled program!");
-    system("./a.out");
+    if (fileExists("./a.out")) {
+        fk::msg(1, "Running the compiled program!");
+        system("./a.out");
+    } else {
+        fk::msg(3, "Program not compiled, missing file.");
+    }
 }
 
-void src::handleBuildingAndRunningTheProgram(std::string runLibraryInstallScripts, std::string buildFlagsPath) {
+void src::handleBuildingAndRunningTheProgram(std::string runLibraryInstallScripts, std::string buildFlagsPath,  int argc, char* argv) {
     if (fileExists(runLibraryInstallScripts)) {
         std::string cmd = "sudo -S chmod +x " + runLibraryInstallScripts + " && sudo -S bash " + runLibraryInstallScripts + " > /dev/null 2>&1";
         system(cmd.c_str());
-        generateBuildCommand(buildFlagsPath);
+        generateBuildCommand(buildFlagsPath, argc, argv);
     }
     runCompiledProgram();
 }
