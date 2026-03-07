@@ -6,7 +6,7 @@
 
 namespace fs = std::filesystem;
 
-int main() {
+int main(int argc, char *argv[]) {
     fs::create_directory("out");
     src::outputNeededLibraries("example.cc", "out/neededLibraries.txt");
     src::generateInstallScript("out/libNotFound.txt");
