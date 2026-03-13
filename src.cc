@@ -31,8 +31,10 @@ void src::outputNeededLibraries(const std::string file, std::string librariesOut
             searchLibraryPath = "/usr/local/include/" + library;
             if (fileExists(searchLibraryPath)) {
                 fk::writeDataToFile(foundLibrariesList, library,true);
+                std::cout << "Found library: " << library << std::endl;
             } else {
                 fk::writeDataToFile(notFoundLibrariesList, library,true);
+                std::cout << "Missing library: " << library << std::endl;
             }
         }
     }
@@ -61,7 +63,8 @@ void src::runCompiledProgram() {
 
 void src::handleBuildingAndRunningTheProgram(std::string runLibraryInstallScripts, std::string buildFlagsPath,  int argc, char* argv) {
     if (fileExists(runLibraryInstallScripts)) {
-        std::string cmd = "sudo -S chmod +x " + runLibraryInstallScripts + " && sudo -S bash " + runLibraryInstallScripts + " > /dev/null 2>&1";
+        std::string cmd = "sudo -S chmod +x " + runLibraryInstallScripts + " && sudo -S bash " + runLibraryInstallScripts;
+        std::cout << "Run library install scripts: " << cmd << std::endl;
         system(cmd.c_str());
         generateBuildCommand(buildFlagsPath, argc, argv);
     }
@@ -76,6 +79,7 @@ void src::generateInstallScript(std::string foundLibraries) {
     std::string buildFlagsPath = "out/buildFlags.txt";
     std::string buildScriptPath = buildScriptsDir + "0" + ".sh";
     std::string runLibraryInstallScripts = "out/runLibraryInstallScripts.sh";
+    std::cout << "Generating install script: " << std::endl;
     for (size_t i = 0; i < library.size(); ++i) {
         for (size_t j = 0; j < availableLibrariesToBeInstalled.size(); ++j) {
             if (library[i] == availableLibrariesToBeInstalled[j]) {
