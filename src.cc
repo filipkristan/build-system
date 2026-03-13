@@ -42,7 +42,7 @@ void src::outputNeededLibraries(const std::string file, std::string librariesOut
 
 void src::generateBuildCommand(std::string buildFlagsPath, int argc, char* argv) {
     std::string allBuildFlags = fk::readDataFromFile(buildFlagsPath);
-    std::string inputFile = "main.cpp";
+    std::string inputFile;
     if (argc == 2) {
         inputFile = argv;
     }
