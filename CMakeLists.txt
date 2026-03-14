@@ -9,6 +9,8 @@ add_executable(abs
         libFK.hh
         src.cc
         src.hh
+        progressBar.cc
+        progressBar.hh
 )
 
 set(RESOURCES_DIR "${CMAKE_INSTALL_PREFIX}/share/abs/res")
