@@ -11,9 +11,9 @@ namespace fs = std::filesystem;
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        fk::msg(1, "No input file specified.");
+        fk::msg(3, "No input file specified.");
     } else if (argc > 2) {
-        fk::msg(1, "Too many inputs specified.");
+        fk::msg(3, "Too many inputs specified.");
     }
     else {
         fs::create_directory("out");
