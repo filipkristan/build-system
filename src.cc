@@ -77,7 +77,6 @@ void src::generateInstallScript(std::string foundLibraries) {
     std::string buildFlagsPath = "out/buildFlags.txt";
     std::string buildScriptPath = buildScriptsDir + "0" + ".sh";
     std::string runLibraryInstallScripts = "out/runLibraryInstallScripts.sh";
-    std::cout << "Generating install script: " << std::endl;
     for (size_t i = 0; i < library.size(); ++i) {
         for (size_t j = 0; j < availableLibrariesToBeInstalled.size(); ++j) {
             if (library[i] == availableLibrariesToBeInstalled[j]) {
