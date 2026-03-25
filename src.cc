@@ -37,7 +37,6 @@ void src::outputNeededLibraries(const std::string file, std::string librariesOut
             }
         }
     }
-    printProgressBar(5,40,0);
 }
 
 void src::generateBuildCommand(std::string buildFlagsPath, int argc, char* argv) {
@@ -49,12 +48,10 @@ void src::generateBuildCommand(std::string buildFlagsPath, int argc, char* argv)
     std::string outputFileName = "a.out";
     std::string buildCommand = "clang " + inputFile + " -lstdc++ " + allBuildFlags + " -o " + outputFileName;
     fk::msg(1, "Compiling the program!");
-    printProgressBar(40,80,0);
     system(buildCommand.c_str());
 }
 
 void src::runCompiledProgram() {
-    printProgressBar(95,100,0);
     if (fileExists("./a.out")) {
         fk::msg(1, "Running the compiled program!");
         system("export DYLD_LIBRARY_PATH=/usr/local/lib && ./a.out");
@@ -70,7 +67,6 @@ void src::handleBuildingAndRunningTheProgram(std::string runLibraryInstallScript
         system(cmd.c_str());
         generateBuildCommand(buildFlagsPath, argc, argv);
     }
-    printProgressBar(80,95,0);
     runCompiledProgram();
 }
 
